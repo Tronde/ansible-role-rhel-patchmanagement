@@ -24,7 +24,7 @@ Because the production systems are most important they are divided in two separa
 
 A Bash script is used to trigger the playbook which runs the Patch-Management at the due date.
 
-The process still needs some manual work to do by a Sysadmin. But a more automated version will follow soon.
+The process still needs some manual work to do by a Sysadmin. But a more automated version will follow soon. Please feel free to use the issue tracker to ask questions about the usage of the role or the role itself and report bugs you may find.
 
 How to get the advisory information?
 ------------------------------------
@@ -38,8 +38,6 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 
 Role Variables
 --------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
 At first I like to explain the variables to set with an example from `vars/main.yml`. A more detailed description will follow:
 
@@ -98,4 +96,4 @@ MIT
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+ * Original: Joerg Kastning
