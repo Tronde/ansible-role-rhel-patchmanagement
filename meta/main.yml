@@ -8,7 +8,7 @@ galaxy_info:
   min_ansible_version: 2.3
 
   platforms:
-  - name: RHEL
+  - name: EL
     versions:
     - 7
 
