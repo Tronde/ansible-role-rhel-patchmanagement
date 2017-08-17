@@ -1,0 +1,11 @@
+---
+- hosts: all
+
+  tasks:
+    - name: Group by OS
+      group_by: key=os_{{ ansible_distribution }}
+      changed_when: False
+
+- hosts: os_RedHat
+  roles:
+    - patch_rhel
