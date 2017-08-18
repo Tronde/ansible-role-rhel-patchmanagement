@@ -8,4 +8,4 @@
 
 - hosts: os_RedHat
   roles:
-    - patch_rhel
+    - rhel-patchmanagement
