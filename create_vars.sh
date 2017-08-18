@@ -8,10 +8,10 @@ ADVISORIES='/data/jka_dev/new_advisories.txt'
 CURRENT_PATCH_SET="/data/jka_dev/patch_set_`date +%Y-%m-%d.txt`"
 VARS='/data/jka_dev/rhel-patchmanagement/vars/main.yml'
 MAIL_TEXT='/data/jka_dev/mail_text.txt'
-DATE1=""
-DATE2=""
-DATE3=""
-DATE4=""
+DATE1="Date1"
+DATE2="Date2"
+DATE3="Date3"
+DATE4="Date4"
 
 # Functions ##################################################################
 get_advisories() {
