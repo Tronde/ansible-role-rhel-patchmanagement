@@ -6,7 +6,7 @@
 BASELINE='/data/jka_dev/patch_baseline.txt'
 ADVISORIES='/data/jka_dev/new_advisories.txt'
 CURRENT_PATCH_SET="/data/jka_dev/patch_set_`date +%Y-%m-%d.txt`"
-VARS='/data/jka_dev/rhel-patchmanagement/vars/main.yml'
+VARS='/data/jka_dev/main.yml'
 MAIL_TEXT='/data/jka_dev/mail_text.txt'
 DATE1="Date1"
 DATE2="Date2"
@@ -21,7 +21,7 @@ get_advisories() {
 create_patch_set() {
   if [ ! -f "${BASELINE}" ]
   then
-    get_advisories | tee "${BASELINE}" "${CURRENT_PATCH_SET}"
+    get_advisories | tee "${BASELINE}" "${CURRENT_PATCH_SET}" >/dev/null 2>&1
   else
     if [ -f ${ADVISORIES}" ] && [ -s ${ADVISORIES}" ]
     then
@@ -38,9 +38,9 @@ create_vars() {
   do
     if [[ -z $ADVISORY_LIST ]]
     then
-      $ADVISORY_LIST="${NAME}"
+      ADVISORY_LIST="${NAME}"
     else
-      $ADVISORY_LIST="${ADVISORY_LIST},${NAME}"
+      ADVISORY_LIST="${ADVISORY_LIST},${NAME}"
     fi
   done < "${CURRENT_PATCH_SET}"
 
@@ -74,6 +74,6 @@ then
   echo "ERROR: Package 'coreutils' needs to be installed."
   exit 1
 fi
-get_advisories
+create_patch_set
 create_vars
 create_mail
