@@ -52,21 +52,23 @@ EOF
 }
 
 create_mail() {
-  echo "Hallo," >"${MAIL_TEXT}"
-  echo "zu den unten genannten Stichtagen erfolgt die zentral gesteuerte Installation der folgenden Red Hat Advisories: ${ADVISORY_LIST}." >>"${MAIL_TEXT}"
-  echo "" >>"${MAIL_TEXT}"
-  echo "Informationen zu den genannten Advisory findet man unter der URL: https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.3%20Beta/x86_64/product-errata" >>"${MAIL_TEXT}"
-  echo "" >>"${MAIL_TEXT}"
-  echo "Die von den Advisory betroffenen Pakete werden nur dann aktualisiert, falls die Advisory nicht bereits vor dem jeweiligen Stichtag durch den Systembetreiber eingespielt wurden." >>"${MAIL_TEXT}"
-  echo "" >>"${MAIL_TEXT}"
-  echo "Es gelten folgende Stichtage fuer die Installation:" >>"${MAIL_TEXT}"
-  echo "" >>"${MAIL_TEXT}"
-  echo "  * ${DATE1} Installation in der E-Stage" >>"${MAIL_TEXT}"
-  echo "  * ${DATE2} Installation in der Q-Stage" >>"${MAIL_TEXT}"
-  echo "  * ${DATE3} Installation in der P-Stage-1" >>"${MAIL_TEXT}"
-  echo "  * ${DATE4} Installation in der P-Stage-2" >>"${MAIL_TEXT}"
-  echo "" >>"${MAIL_TEXT}"
-  echo "Sollte die Installation der genannten Advisory erforderlich sein, werden die betroffenen Systeme nach der Installation automatisch neugestartet." >>"${MAIL_TEXT}"
+  cat >"${MAIL_TEXT}" <<EOF
+Hallo,
+zu den unten genannten Stichtagen erfolgt die zentral gesteuerte Installation der folgenden Red Hat Advisories: ${ADVISORY_LIST}.
+
+Informationen zu den genannten Advisory findet man unter der URL: https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.3%20Beta/x86_64/product-errata
+
+Die von den Advisory betroffenen Pakete werden nur dann aktualisiert, falls die Advisory nicht bereits vor dem jeweiligen Stichtag durch den Systembetreiber eingespielt wurden.
+  
+Es gelten folgende Stichtage fuer die Installation:
+
+  * ${DATE1} Installation in der E-Stage
+  * ${DATE2} Installation in der Q-Stage
+  * ${DATE3} Installation in der P-Stage-1
+  * ${DATE4} Installation in der P-Stage-2
+
+Sollte die Installation der genannten Advisory erforderlich sein, werden die betroffenen Systeme nach der Installation automatisch neugestartet.
+EOF
 }
 
 # Main #######################################################################
