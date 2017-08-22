@@ -15,7 +15,7 @@ DATE4="Date4"
 
 # Functions ##################################################################
 get_advisories() {
-  yum updateinfo list all | grep RHSA | sed 's/^i//g' | sed 's/^\s//g' | cut -d' ' -f1 | sort | uniq
+  yum updateinfo list all 2>/dev/null | awk '/RHSA-[0-9]{4}:[0-9]{4}/ {print $(NF-2)}' | sort | uniq
 }
 
 create_patch_set() {
