@@ -1,6 +1,4 @@
 #!/bin/bash
-# Requirements ###############################################################
-# - tee from coreutils
 ##############################################################################
 # Variables ##################################################################
 BASELINE='/data/jka_dev/patch_baseline.txt'
@@ -21,14 +19,15 @@ get_advisories() {
 create_patch_set() {
   if [ ! -f "${BASELINE}" ]
   then
-    get_advisories | tee "${BASELINE}" "${CURRENT_PATCH_SET}" >/dev/null 2>&1
+    get_advisories >"${BASELINE}" 2>/dev/null
+    cp "${BASELINE}" "${CURRENT_PATCH_SET}" 2>/dev/null
   else
     if [ -f ${ADVISORIES}" ] && [ -s ${ADVISORIES}" ]
     then
       mv "${ADVISORIES}" "${BASELINE}"
     fi
     get_advisories >"${ADVISORIES}"
-    diff "${BASELINE}" "${ADVISORIES}" | grep RHSA | sed 's/^>//g' | sed 's/^\s*//g' >"${CURRENT_PATCH_SET}"
+    comm -13 "${BASELINE}" "${ADVISORIES}" >"${CURRENT_PATCH_SET}"
   fi
 }
 
@@ -69,11 +68,6 @@ create_mail() {
 }
 
 # Main #######################################################################
-if [ ! yum list installed coreutils ] >/dev/null 2>&1
-then
-  echo "ERROR: Package 'coreutils' needs to be installed."
-  exit 1
-fi
 create_patch_set
 create_vars
 create_mail
