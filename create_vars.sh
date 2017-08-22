@@ -43,10 +43,12 @@ create_vars() {
     fi
   done < "${CURRENT_PATCH_SET}"
 
-  echo "---" >"${VARS}"
-  echo "  Set_`date +%Y_%m`: ${ADVISORY_LIST}" >>"${VARS}"
-  echo "  ###################################################" >>"${VARS}"
-  echo "  rhsa_to_install: \"{{ Set_`date +%Y_%m` }}\"" >>"${VARS}"
+  cat >"${VARS}" <<EOF
+---
+  Set_`date +%Y_%m`: ${ADVISORY_LIST}"
+  ###################################################
+  rhsa_to_install: "{{ Set_`date +%Y_%m` }}"
+EOF
 }
 
 create_mail() {
