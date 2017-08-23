@@ -1,11 +1,11 @@
 #!/bin/bash
 ##############################################################################
 # Variables ##################################################################
-BASELINE='/data/jka_dev/patch_baseline.txt'
-ADVISORIES='/data/jka_dev/new_advisories.txt'
-CURRENT_PATCH_SET="/data/jka_dev/patch_set_`date +%Y-%m-%d.txt`"
-VARS='/data/jka_dev/main.yml'
-MAIL_TEXT='/data/jka_dev/mail_text.txt'
+BASELINE='/data/jka_dev/rhel-patchmanagement/patch_baseline.txt'
+ADVISORIES='/data/jka_dev/rhel-patchmanagement/new_advisories.txt'
+CURRENT_PATCH_SET="/data/jka_dev/rhel-patchmanagement/patch_set_`date +%Y-%m-%d.txt`"
+VARS='/data/jka_dev/rhel-patchmanagement/vars/main.yml'
+MAIL_TEXT='/data/jka_dev/rhel-patchmanagement/mail_text.txt'
 DATE1="Date1"
 DATE2="Date2"
 DATE3="Date3"
@@ -32,6 +32,10 @@ create_patch_set() {
 }
 
 create_vars() {
+  if [ -f "${VARS}" ]
+  then
+    mv "${VARS}" "${VARS}.bak_`date +%Y-%m-%d`"
+  fi
   ADVISORY_LIST=""
   while read NAME
   do
@@ -45,7 +49,7 @@ create_vars() {
 
   cat >"${VARS}" <<EOF
 ---
-  Set_`date +%Y_%m`: ${ADVISORY_LIST}"
+  Set_`date +%Y_%m`: ${ADVISORY_LIST}
   ###################################################
   rhsa_to_install: "{{ Set_`date +%Y_%m` }}"
 EOF
