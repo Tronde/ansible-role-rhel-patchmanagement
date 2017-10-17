@@ -20,11 +20,11 @@ In the Ansible Inventory nodes are summarized in one of the following groups whi
 
 In case packages were updated on target nodes the hosts will reboot afterwards.
 
-Because the production systems are most important they are divided in two separate groups to decrease the risk of failure and service downtime due to advisory installation.
+Because the production systems are most important they are divided into two separate groups to decrease the risk of failure and service downtime due to advisory installation.
 
 A Bash script is used to trigger the playbook which runs the Patch-Management at the due date.
 
-The process still needs some manual work to do by a Sysadmin. But a more automated version will follow soon. Please feel free to use the issue tracker to ask questions about the usage of the role or the role itself and report bugs you may find.
+The process still needs some manual work to do by a Sysadmin. Please feel free to use the issue tracker to ask questions about the usage of the role or the role itself and report bugs you may find.
 
 How to get the advisory information?
 ------------------------------------
@@ -39,32 +39,7 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-At first I like to explain the variables to set with an example from `vars/main.yml`. A more detailed description will follow:
-
-```
----
-  a_2016_10_11: RHSA-2016:2046,RHSA-2016:2047
-  a_2016_10_19: RHSA-2016:2079
-  a_2016_10_24: RHSA-2016:2098
-  #
-  Set_2016_11: "{{ a_2016_10_11 }},{{ a_2016_10_19 }},{{ a_2016_10_24 }}"
-  #
-  a_2016_11_03: RHSA-2016:2573,RHSA-2016:2574,RHSA-2016:2575,RHSA-2016:2577,RHSA-2016:2580,RHSA-2016:2581,RHSA-2016:2582,RHSA-2016:2583,RHSA-2016:2585,RHSA-2016:2586,RHSA-2016:2587,RHSA-2016:2588,RHSA-2016:2588,RHSA-2016:2591,RHSA-2016:2592,RHSA-2016:2593,RHSA-2016:2595,RHSA-2016:2597,RHSA-2016:2599,RHSA-2016:2601,RHSA-2016:2603,RHSA-2016:2605,RHSA-2016:2610,RHSA-2016:2615
-  #
-  a_2016_11_08: RHSA-2016:2674
-  a_2016_11_14: RHSA-2016:2702
-  a_2016_11_16: RHSA-2016:2779
-  a_2016_11_28: RHSA-2016:2824
-  #
-  a_2016_12_06: RHSA-2016:2872
-  #
-  Set_2016_12: "{{ a_2016_11_03 }},{{ a_2016_11_08 }},{{ a_2016_11_14 }},{{ a_2016_11_16 }},{{ a_2016_11_28 }},{{ a_2016_12_06 }}"
-  #
-  rhsa_to_install: "{{ Set_2016_12 }}"
-```
-
-The variables **a_<Year>_<Month>_<Day>** includes the ids of the advisories which should be installed. The date in the variable name matches the date of the Red Hat Advisory Notification email. This will change in a future version of this role. A Patch-Set is defined by summarizing the variables in **Set_<Year>_<Month>**. As a value for <Month> the month is chosen in which the Patch-Set should be installed. And the variable **rhsa_to_install** defines which Patch-Sets will be installed in the next patch cycle. Usually only one Patch-Set will be defined here but it is possible to run older Patch-Sets again, for example if hosts were not reachable during the last patch cycle.
-
+To get the RHEL-Patchmanagement to work it is required to set `vars/main.yml`. This is done by running the script `create_vars.sh`.
 
 Dependencies
 ------------
@@ -86,7 +61,7 @@ Including an example of how to use your role (for instance, with variables passe
 
 - hosts: os_RedHat
   roles:
-    - patch_rhel
+    - rhel_patchmanagement
 
 License
 -------
