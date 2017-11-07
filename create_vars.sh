@@ -1,15 +1,15 @@
 #!/bin/bash
 ##############################################################################
 # Variables ##################################################################
-BASELINE='/data/jka_dev/rhel-patchmanagement/patch_baseline.txt'
+BASELINE='/data/jka_dev/rhel-patchmanagement/baseline_advisories.txt'
 ADVISORIES='/data/jka_dev/rhel-patchmanagement/new_advisories.txt'
 CURRENT_PATCH_SET="/data/jka_dev/rhel-patchmanagement/patch_set_`date +%Y-%m-%d.txt`"
 VARS='/data/jka_dev/rhel-patchmanagement/vars/main.yml'
 MAIL_TEXT='/data/jka_dev/rhel-patchmanagement/mail_text.txt'
-DATE1="Date1"
-DATE2="Date2"
-DATE3="Date3"
-DATE4="Date4"
+DATE1="2017-11-14T04:20"
+DATE2="2017-11-21T04:20"
+DATE3="2017-11-28T04:20"
+DATE4="2017-11-29T04:20"
 
 # Functions ##################################################################
 get_advisories() {
