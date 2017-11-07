@@ -20,7 +20,7 @@ In the Ansible Inventory nodes are summarized in one of the following groups whi
 
 In case packages were updated on target nodes the hosts will reboot afterwards.
 
-Because the production systems are most important they are divided into two separate groups to decrease the risk of failure and service downtime due to advisory installation.
+Because the production systems are most important, they are divided into two separate groups to decrease the risk of failure and service downtime due to advisory installation.
 
 A Bash script is used to trigger the playbook which runs the Patch-Management at the due date.
 
@@ -29,12 +29,7 @@ The process still needs some manual work to do by a Sysadmin. Please feel free t
 How to get the advisory information?
 ------------------------------------
 
-You could subscribe to the Red Hat Advisory Notifications from Customer Portal or use the `yum updateinfo list` command to get the advisory information.
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+You could subscribe to the Red Hat Advisory Notifications from Customer Portal or use the `yum updateinfo list all` command to get the advisory information.
 
 Role Variables
 --------------
@@ -62,6 +57,17 @@ Including an example of how to use your role (for instance, with variables passe
 - hosts: os_RedHat
   roles:
     - rhel_patchmanagement
+
+How to use this role
+--------------------
+
+Please be aware that the following howto is considered to work with the use case described above. You may have to adjust some sort of things if you have a differen use case. I assume that you have already cloned this repo or downloaded all the necessary files. After that you have to do the following steps to geht the RHEL-Patchmanagement to work.
+
+ 1. Edit `run_rhel_patch_mgmt.sh` and insert the sshkey which is used to connect to your nodes.
+ 1. Create a cronjob which runs `run_rhel_patch_mgmt.sh` on every Tuesday and Wednesday at a chosen time. The script will trigger the ansible playbook at the times mentioned in the above use case. You could adjust it to your needs.
+ 1. You may have to edit `patch_rhel.yml` to fit your needs. By default this playbook runs on all hosts of your inventory which have a Red Hat operating system installed.
+ 1. Before the next patch cycle starts you have to run `create_vars.sh` to create a new `/vars/main.yml` file with a current patch set.
+ 1. You may use the content of `mail_text.txt` to notify your users which advisories are going to be installed.
 
 License
 -------
