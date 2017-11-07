@@ -73,7 +73,7 @@ Die von den Advisory betroffenen Pakete werden nur dann aktualisiert, falls die 
 yum -y update-minimal --advisory ${ADVISORY_LIST}
 ~~~
 
-Informationen zu den genannten Advisory findet man unter der URL: https://access.redhat.com/downloads/content/69/ver=/rhel---7/7.3%20Beta/x86_64/product-errata
+Informationen zu den genannten Advisory findet man unter der URL: https://access.redhat.com/errata/#/
 
 Sollte die Installation der genannten Advisory erforderlich sein, werden die betroffenen Systeme nach der Installation automatisch neugestartet.
 EOF
