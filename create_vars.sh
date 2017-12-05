@@ -67,15 +67,15 @@ Es gelten folgende Stichtage fuer die Installation:
   * ${DATE3} Installation in der P-Stage-1
   * ${DATE4} Installation in der P-Stage-2
 
-Die von den Advisory betroffenen Pakete werden nur dann aktualisiert, falls die Advisory nicht bereits vor dem jeweiligen Stichtag durch den Systembetreiber eingespielt wurden. Der folgende Befehl kann direkt per Copy & Paste zur Installation genutzt werden.
+Die von den Advisories betroffenen Pakete werden nur dann aktualisiert, falls die Advisories nicht bereits vor dem jeweiligen Stichtag durch den Systembetreiber eingespielt wurden. Der folgende Befehl kann direkt per Copy & Paste zur Installation genutzt werden.
 
 ~~~
 yum -y update-minimal --advisory ${ADVISORY_LIST}
 ~~~
 
-Informationen zu den genannten Advisory findet man unter der URL: https://access.redhat.com/errata/#/
+Informationen zu den genannten Advisories findet man unter der URL: https://access.redhat.com/errata/#/
 
-Sollte die Installation der genannten Advisory erforderlich sein, werden die betroffenen Systeme nach der Installation automatisch neugestartet.
+Sollte die Installation der genannten Advisories erforderlich sein, werden die betroffenen Systeme nach der Installation automatisch neugestartet.
 EOF
 }
 
