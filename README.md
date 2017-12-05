@@ -20,51 +20,23 @@ In the Ansible Inventory nodes are summarized in one of the following groups whi
 
 In case packages were updated on target nodes the hosts will reboot afterwards.
 
-Because the production systems are most important they are divided in two separate groups to decrease the risk of failure and service downtime due to advisory installation.
+Because the production systems are most important, they are divided into two separate groups to decrease the risk of failure and service downtime due to advisory installation.
 
 A Bash script is used to trigger the playbook which runs the Patch-Management at the due date.
 
-The process still needs some manual work to do by a Sysadmin. But a more automated version will follow soon. Please feel free to use the issue tracker to ask questions about the usage of the role or the role itself and report bugs you may find.
+The process still needs some manual work to do by a Sysadmin. Please feel free to use the issue tracker to ask questions about the usage of the role or the role itself and report bugs you may find.
 
 How to get the advisory information?
 ------------------------------------
 
-You could subscribe to the Red Hat Advisory Notifications from Customer Portal or use the `yum updateinfo list` command to get the advisory information.
+To retrieve the advisory information and to create a patch set in `vars/main.yml` you have to run the script `create_vars.sh`.
 
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+For further information about the advisories you could subscribe to the Red Hat Advisory Notifications from Customer Portal or use the `yum updateinfo list all` command to get the advisory information.
 
 Role Variables
 --------------
 
-At first I like to explain the variables to set with an example from `vars/main.yml`. A more detailed description will follow:
-
-```
----
-  a_2016_10_11: RHSA-2016:2046,RHSA-2016:2047
-  a_2016_10_19: RHSA-2016:2079
-  a_2016_10_24: RHSA-2016:2098
-  #
-  Set_2016_11: "{{ a_2016_10_11 }},{{ a_2016_10_19 }},{{ a_2016_10_24 }}"
-  #
-  a_2016_11_03: RHSA-2016:2573,RHSA-2016:2574,RHSA-2016:2575,RHSA-2016:2577,RHSA-2016:2580,RHSA-2016:2581,RHSA-2016:2582,RHSA-2016:2583,RHSA-2016:2585,RHSA-2016:2586,RHSA-2016:2587,RHSA-2016:2588,RHSA-2016:2588,RHSA-2016:2591,RHSA-2016:2592,RHSA-2016:2593,RHSA-2016:2595,RHSA-2016:2597,RHSA-2016:2599,RHSA-2016:2601,RHSA-2016:2603,RHSA-2016:2605,RHSA-2016:2610,RHSA-2016:2615
-  #
-  a_2016_11_08: RHSA-2016:2674
-  a_2016_11_14: RHSA-2016:2702
-  a_2016_11_16: RHSA-2016:2779
-  a_2016_11_28: RHSA-2016:2824
-  #
-  a_2016_12_06: RHSA-2016:2872
-  #
-  Set_2016_12: "{{ a_2016_11_03 }},{{ a_2016_11_08 }},{{ a_2016_11_14 }},{{ a_2016_11_16 }},{{ a_2016_11_28 }},{{ a_2016_12_06 }}"
-  #
-  rhsa_to_install: "{{ Set_2016_12 }}"
-```
-
-The variables **a_<Year>_<Month>_<Day>** includes the ids of the advisories which should be installed. The date in the variable name matches the date of the Red Hat Advisory Notification email. This will change in a future version of this role. A Patch-Set is defined by summarizing the variables in **Set_<Year>_<Month>**. As a value for <Month> the month is chosen in which the Patch-Set should be installed. And the variable **rhsa_to_install** defines which Patch-Sets will be installed in the next patch cycle. Usually only one Patch-Set will be defined here but it is possible to run older Patch-Sets again, for example if hosts were not reachable during the last patch cycle.
-
+To get the RHEL-Patchmanagement to work it is required to set `vars/main.yml`. This is done by running the script `create_vars.sh`.
 
 Dependencies
 ------------
@@ -86,7 +58,18 @@ Including an example of how to use your role (for instance, with variables passe
 
 - hosts: os_RedHat
   roles:
-    - patch_rhel
+    - rhel_patchmanagement
+
+How to use this role
+--------------------
+
+Please be aware that the following howto is considered to work with the use case described above. You may have to adjust some sort of things if you have a differen use case. I assume that you have already cloned this repo or downloaded all the necessary files. After that you have to do the following steps to geht the RHEL-Patchmanagement to work.
+
+ 1. Edit `run_rhel_patch_mgmt.sh` and insert the sshkey which is used to connect to your nodes.
+ 1. Create a cronjob which runs `run_rhel_patch_mgmt.sh` on every Tuesday and Wednesday at a chosen time. The script will trigger the ansible playbook at the times as mentioned in the use case above. You could adjust it to your needs.
+ 1. You may have to edit `patch_rhel.yml` to fit your needs. By default this playbook runs on all hosts of your inventory which have a Red Hat operating system installed.
+ 1. Before the next patch cycle starts you have to edit `create_vars.sh` and insert the due dates you like to run the next patch cycle. Run `create_vars.sh` afterwards to create a new `vars/main.yml` file with a current patch set and the file `mail_text.txt`.
+ 1. You may use the content of `mail_text.txt` to notify your users which advisories are going to be installed.
 
 License
 -------

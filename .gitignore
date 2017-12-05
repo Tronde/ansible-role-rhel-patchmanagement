@@ -1,0 +1,5 @@
+mail_text.txt
+patch_baseline.*
+patch_set*
+vars/main.yml.bak*
+new_advisories.txt
