@@ -13,7 +13,7 @@ DATE4="2017-12-27T04:20"
 
 # Functions ##################################################################
 get_advisories() {
-  yum updateinfo list all 2>/dev/null | awk '/RHSA-[0-9]{4}:[0-9]{4}/ {print $(NF-2)}' | sort | uniq
+  yum updateinfo list all 2>/dev/null | awk '/RHSA-[0-9]{4}:[0-9]{4}/ {print $(NF-2)}' | sort -u
 }
 
 create_patch_set() {
