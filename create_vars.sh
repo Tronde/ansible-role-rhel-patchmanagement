@@ -6,10 +6,10 @@ ADVISORIES='/data/jka_dev/rhel-patchmanagement/new_advisories.txt'
 CURRENT_PATCH_SET="/data/jka_dev/rhel-patchmanagement/patch_set_`date +%Y-%m-%d.txt`"
 VARS='/data/jka_dev/rhel-patchmanagement/vars/main.yml'
 MAIL_TEXT='/data/jka_dev/rhel-patchmanagement/mail_text.txt'
-DATE1="2017-12-12T04:20"
-DATE2="2017-12-19T04:20"
-DATE3="2017-12-26T04:20"
-DATE4="2017-12-27T04:20"
+DATE1="`date --iso -d '+7 days'`T04:20"
+DATE2="`date --iso -d '+14 days'`T04:20"
+DATE3="`date --iso -d '+21 days'`T04:20"
+DATE4="`date --iso -d '+22 days'`T04:20"
 
 # Functions ##################################################################
 get_advisories() {
