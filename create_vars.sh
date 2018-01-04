@@ -6,6 +6,7 @@ ADVISORIES='/data/jka_dev/rhel-patchmanagement/new_advisories.txt'
 CURRENT_PATCH_SET="/data/jka_dev/rhel-patchmanagement/patch_set_`date +%Y-%m-%d.txt`"
 VARS='/data/jka_dev/rhel-patchmanagement/vars/main.yml'
 MAIL_TEXT='/data/jka_dev/rhel-patchmanagement/mail_text.txt'
+MAIL_RCP='rcp@example.com'
 DATE1="`date --iso -d '+7 days'`T04:20"
 DATE2="`date --iso -d '+14 days'`T04:20"
 DATE3="`date --iso -d '+21 days'`T04:20"
@@ -58,7 +59,7 @@ EOF
 create_mail() {
   cat >"${MAIL_TEXT}" <<EOF
 Hallo,
-zu den unten folgenden Stichtagen erfolgt die zentral gesteuerte Installation der Red Hat Advisories.
+zu den unten genannten Stichtagen erfolgt die zentral gesteuerte Installation der Red Hat Advisories.
   
 Es gelten folgende Stichtage fuer die Installation:
 
@@ -79,7 +80,12 @@ Sollte die Installation der genannten Advisories erforderlich sein, werden die b
 EOF
 }
 
+send_mail() {
+  /usr/bin/mailx -s 'Ankündigung der Installation von Red Hat Advisories' "${MAIL_RCP}" <"${MAIL_TEXT}"
+}
+
 # Main #######################################################################
 create_patch_set
 create_vars
 create_mail
+send_mail
