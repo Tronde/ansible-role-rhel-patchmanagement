@@ -4,3 +4,4 @@ patch_set*
 vars/main.yml.bak*
 vars/main.yml
 new_advisories.txt
+variables.txt

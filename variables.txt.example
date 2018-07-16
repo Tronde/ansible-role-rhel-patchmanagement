@@ -1,0 +1,11 @@
+# Variables ##################################################################
+BASELINE='/path/to/rhel-patchmanagement/baseline_advisories.txt'
+ADVISORIES='/path/to/rhel-patchmanagement/new_advisories.txt'
+CURRENT_PATCH_SET="/path/to/rhel-patchmanagement/patch_set_`date +%Y-%m-%d.txt`"
+VARS='/path/to/rhel-patchmanagement/vars/main.yml'
+MAIL_TEXT='/path/to/rhel-patchmanagement/mail_text.txt'
+MAIL_RCP='rcp@example.com'
+DATE1="`date --iso -d '+7 days'`T04:20"
+DATE2="`date --iso -d '+14 days'`T04:20"
+DATE3="`date --iso -d '+21 days'`T04:20"
+DATE4="`date --iso -d '+22 days'`T04:20"
