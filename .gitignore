@@ -2,4 +2,5 @@ mail_text.txt
 patch_baseline.*
 patch_set*
 vars/main.yml.bak*
+vars/main.yml
 new_advisories.txt
