@@ -1,7 +1,7 @@
 #!/bin/bash
 ##############################################################################
 
-source variables.txt
+source /absolute/path/to/variables.txt
 
 # Functions ##################################################################
 get_advisories() {
