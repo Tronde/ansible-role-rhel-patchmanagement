@@ -63,7 +63,8 @@ Please be aware that the following howto is considered to work with the use case
  1. Edit `run_rhel_patch_mgmt.sh` and insert the sshkey which is used to connect to your nodes.
  1. Create a cronjob which runs `run_rhel_patch_mgmt.sh` on every Tuesday and Wednesday at a chosen time. The script will trigger the ansible playbook at the times as mentioned in the use case above. You could adjust it to your needs.
  1. You may have to edit `patch_rhel.yml` to fit your needs. By default this playbook runs on all hosts of your inventory which have a Red Hat operating system installed.
- 1. Edit `create_vars.sh` and set the variables on top of the script accordingly to your environment.
+ 1. Rename variables.txt.example to variables.txt and edit the file accordingly to fit your environment.
+ 1. Edit `create_vars.sh` and set the abolute path to the variables file.
  1. Before the next patch cycle starts run `create_vars.sh` to create a new `vars/main.yml` file with a current patch set and the file `mail_text.txt`.
  1. *Optional*: You may use the content of `mail_text.txt` to notify your users which advisories are going to be installed.
  1. You could use the function `send_mail` instead to send a notification automatically to a specified email address. This function is enabled by default.
@@ -76,4 +77,4 @@ MIT
 Author Information
 ------------------
 
- * Original: Joerg Kastning
+ * Original: Joerg Kastning <joerg(dot)kastning(at)uni-bielefeld(dot)de>
