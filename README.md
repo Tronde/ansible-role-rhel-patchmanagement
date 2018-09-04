@@ -1,7 +1,7 @@
 RHEL-Patchmanagement
 ====================
 
-Patchmanagement for Red Hat Enterprise Linux.
+Patchmanagement for Red Hat Enterprise Linux Server.
 
 Use Case
 --------
@@ -14,17 +14,20 @@ In our special use case only RHSA are installed to ensure a minimum limit of sec
 
 In the Ansible Inventory nodes are summarized in one of the following groups which define when a node is scheduled for the patch installation:
 
- * testing - on the second Tuesday of a month
- * quality - on the third Tuesday of a month
- * production - on the fourth Tuesday and Wednesday of a month
+ * [rhel-patch-phase1] - on the second Tuesday of a month
+ * [rhel-patch-phase2] - on the third Tuesday of a month
+ * [rhel-patch-phase3] - on the fourth Tuesday of a month
+ * [rhel-patch-phase4] - on the fourth Wednesday of a month
 
 In case packages were updated on target nodes the hosts will reboot afterwards.
 
-Because the production systems are most important, they are divided into two separate groups to decrease the risk of failure and service downtime due to advisory installation.
+Because the production systems are most important, they are divided into two separate groups (phase3 and phase4) to decrease the risk of failure and service downtime due to advisory installation.
+
+*Of course you could choose which hosts to put in which phase and the day you want to run a patch cycle. Feel free do adjust the role to your needs.*
 
 A Bash script is used to trigger the playbook which runs the Patch-Management at the due date.
 
-The process still needs some manual work to do by a Sysadmin. Please feel free to use the issue tracker to ask questions about the usage of the role or the role itself and report bugs you may find.
+Once the role is setup the RHEL-Patchmanagement runs fully automated. Please feel free to use the issue tracker to ask questions about the usage of the role or the role itself and report bugs you may find.
 
 How to get the advisory information?
 ------------------------------------
@@ -36,7 +39,7 @@ For further information about the advisories you could subscribe to the Red Hat 
 Role Variables
 --------------
 
-To get the RHEL-Patchmanagement to work it is required to set `vars/main.yml`. This is done by running the script `create_vars.sh`.
+The role variables in `vars/main.yml` are set automatically by the script create_vars.sh which is triggered by cron.
 
 Example Playbook
 ----------------
@@ -62,12 +65,12 @@ Please be aware that the following howto is considered to work with the use case
 
  1. Edit `run_rhel_patch_mgmt.sh` and insert the sshkey which is used to connect to your nodes.
  1. Create a cronjob which runs `run_rhel_patch_mgmt.sh` on every Tuesday and Wednesday at a chosen time. The script will trigger the ansible playbook at the times as mentioned in the use case above. You could adjust it to your needs.
- 1. You may have to edit `patch_rhel.yml` to fit your needs. By default this playbook runs on all hosts of your inventory which have a Red Hat operating system installed.
+ 1. You may have to edit `patch_rhel.yml` to fit your needs. By default this playbook runs on all hosts of your inventory which have a Red Hat operating system installed and which are member of the corresponding rhel-patch-phaseX group.
  1. Rename variables.txt.example to variables.txt and edit the file accordingly to fit your environment.
- 1. Edit `create_vars.sh` and set the abolute path to the variables file.
- 1. Before the next patch cycle starts run `create_vars.sh` to create a new `vars/main.yml` file with a current patch set and the file `mail_text.txt`.
+ 1. Edit `create_vars.sh` and set source to the abolute path for the variables file.
+ 1. Per default `create_vars.sh` runs on the first Tuesday of month to create a new `vars/main.yml` file with a current patch set and the file `mail_text.txt`.
+ 1. You could use the function `send_mail` to send a notification automatically to a specified email address. This function is enabled by default.
  1. *Optional*: You may use the content of `mail_text.txt` to notify your users which advisories are going to be installed.
- 1. You could use the function `send_mail` instead to send a notification automatically to a specified email address. This function is enabled by default.
 
 License
 -------
