@@ -54,10 +54,10 @@ zu den unten genannten Stichtagen erfolgt die zentral gesteuerte Installation de
   
 Es gelten folgende Stichtage fuer die Installation:
 
-  * ${DATE1} Installation in der E-Stage
-  * ${DATE2} Installation in der Q-Stage
-  * ${DATE3} Installation in der P-Stage-1
-  * ${DATE4} Installation in der P-Stage-2
+  * ${DATE1} Installation Phase 1
+  * ${DATE2} Installation Phase 2
+  * ${DATE3} Installation Phase 3
+  * ${DATE4} Installation Phase 4
 
 Die von den Advisories betroffenen Pakete werden nur dann aktualisiert, falls die Advisories nicht bereits vor dem jeweiligen Stichtag durch den Systembetreiber eingespielt wurden. Der folgende Befehl kann direkt per Copy & Paste zur Installation genutzt werden.
 
