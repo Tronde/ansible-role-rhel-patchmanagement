@@ -1,0 +1,21 @@
+foohostA.example.com
+foohostB.example.com
+foohostC.example.com
+foohostD.example.com
+
+[foogroup]
+foohostA.example.com
+
+## Gruppen fuer RHEL-Patchmanagement Anfang ##################################
+[rhel-patch-phase1]
+foohostA.example.com
+
+[rhel-patch-phase2]
+foohostB.example.com
+
+[rhel-patch-phase3]
+foohostC.example.com
+
+[rhel-patch-phase4]
+foohostD.example.com
+## Gruppen fuer RHEL-Patchmanagement Ende ####################################
