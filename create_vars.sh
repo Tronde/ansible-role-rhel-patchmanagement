@@ -1,8 +1,7 @@
 #!/bin/bash
 ##############################################################################
 
-#source /absolute/path/to/variables.txt
-source /data/jka_dev/rhel-patchmanagement/variables.txt
+source /absolute/path/to/variables.txt
 
 # Functions ##################################################################
 get_advisories() {
