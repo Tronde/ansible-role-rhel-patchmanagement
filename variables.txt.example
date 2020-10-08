@@ -10,6 +10,14 @@ DATE2="`date --iso -d '+14 days'`T04:20"
 DATE3="`date --iso -d '+21 days'`T04:20"
 DATE4="`date --iso -d '+22 days'`T04:20"
 # Variables you need when using remote advisory sources ######################
+# These are needed if you want to pull additional advisories from another
+# RHEL version.
+#
+# Example:
+# The host you installed this role on has access to the RHEL 7 advisories but
+# you want to get the advisories for RHEL 8, too. In this case you need to
+# fill the following variables in order to connect to an appropriate remote
+# host.
 REMOTE_USER=""
 SSH_KEY=""
 REMOTE_HOSTS=()
