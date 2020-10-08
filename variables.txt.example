@@ -9,3 +9,9 @@ DATE1="`date --iso -d '+7 days'`T04:20"
 DATE2="`date --iso -d '+14 days'`T04:20"
 DATE3="`date --iso -d '+21 days'`T04:20"
 DATE4="`date --iso -d '+22 days'`T04:20"
+# Variables you need when using remote advisory sources ######################
+REMOTE_USER=""
+SSH_KEY=""
+REMOTE_HOSTS=()
+REMOTE_ADVISORIES="${BASEPATH}/remote_advisories.txt"
+TMPFILE="${BASEPATH}/tmpfile.txt"
