@@ -29,10 +29,10 @@ create_patch_set() {
     fi
     cp "${BASELINE}" "${CURRENT_PATCH_SET}" 2>/dev/null
   else
-#    if [ -f "${ADVISORIES}" ] && [ -s "${ADVISORIES}" ]
-#    then
-#      mv "${ADVISORIES}" "${BASELINE}"
-#    fi
+    if [ -f "${ADVISORIES}" ] && [ -s "${ADVISORIES}" ]
+    then
+      mv "${ADVISORIES}" "${BASELINE}"
+    fi
     get_advisories >"${ADVISORIES}"
     if [ -n "$REMOTE_HOSTS" ]
     then
