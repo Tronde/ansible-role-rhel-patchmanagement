@@ -1,7 +1,7 @@
 #!/bin/bash
 ##############################################################################
 
-source /absolute/path/to/variables.txt
+source ansible-role-rhel-patchmanagement/variables.txt
 
 # Functions ##################################################################
 get_advisories() {

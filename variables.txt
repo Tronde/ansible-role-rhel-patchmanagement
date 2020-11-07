@@ -1,0 +1,11 @@
+# Variables ##################################################################
+BASELINE='/var/lib/awx/.ansible/roles/tronde.ansible_role_rhel_patchmanagement/baseline_advisories.txt'
+ADVISORIES='/var/lib/awx/.ansible/roles/tronde.ansible_role_rhel_patchmanagement/new_advisories.txt'
+CURRENT_PATCH_SET="/var/lib/awx/.ansible/roles/tronde.ansible_role_rhel_patchmanagement/patch_set_`date +%Y-%m-%d.txt`"
+VARS='/var/lib/awx/.ansible/roles/tronde.ansible_role_rhel_patchmanagement/vars/main.yml'
+MAIL_TEXT='/var/lib/awx/.ansible/roles/tronde.ansible_role_rhel_patchmanagement/mail_text.txt'
+MAIL_RCP='rcp@example.com'
+DATE1="`date --iso -d '+7 days'`T04:20"
+DATE2="`date --iso -d '+14 days'`T04:20"
+DATE3="`date --iso -d '+21 days'`T04:20"
+DATE4="`date --iso -d '+22 days'`T04:20"

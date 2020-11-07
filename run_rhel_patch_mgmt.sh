@@ -4,9 +4,9 @@ DOM=`date +%d`
 DOW=`date +%w`
 LOG="/var/log/ansible/patch_run_`date +%Y-%m-%d`.log"
 SETUP_LOG="/var/log/ansible/setup_patch_run_`date +%Y-%m-%d`.log"
-SSH_KEY="PUT PATH TO PRIVATE KEY HERE"
-PLAYBOOK="/path/to/patch_rhel.yml"
-CREATEVARS="/path/to/ansible/roles/rhel-patchmanagement/create_vars.sh"
+SSH_KEY="/home/ubuntu/.ssh/id_rsa"
+PLAYBOOK="/var/lib/awx/.ansible/roles/tronde.ansible_role_rhel_patchmanagement/patch_rhel.yml"
+CREATEVARS="/var/lib/awx/.ansible/roles/tronde.ansible_role_rhel_patchmanagement/create_vars.sh"
 
 # Run Patch-Management ad-hoc in the specified stage
 # Example: './run_rhel_patch_mgmt.sh NOW rhel-patch-phase1'
