@@ -8,17 +8,39 @@ get_advisories() {
   yum updateinfo list all 2>/dev/null | awk '/RHSA-[0-9]{4}:[0-9]{4}/ {print $(NF-2)}' | sort -u
 }
 
+get_remote_advisories() {
+  rm "${REMOTE_ADVISORIES}" 2>/dev/null
+  for HOST in "${REMOTE_HOSTS}"
+  do
+    ssh -i "${SSH_KEY}" ${REMOTE_USER}@${HOST} "$(typeset -f get_advisories); get_advisories" >>"${REMOTE_ADVISORIES}" 2>/dev/null
+  done
+}
+
 create_patch_set() {
   if [ ! -f "${BASELINE}" ]
   then
     get_advisories >"${BASELINE}" 2>/dev/null
+    if [ -n "$REMOTE_HOSTS" ]
+    then
+      get_remote_advisories
+      mv "${BASELINE}" "${TMPFILE}"
+      cat "${TMPFILE}" "${REMOTE_ADVISORIES}" | sort -u >"${BASELINE}" 2>/dev/null
+      rm "${REMOTE_ADVISORIES}" "${TMPFILE}"
+    fi
     cp "${BASELINE}" "${CURRENT_PATCH_SET}" 2>/dev/null
   else
-    if [ -f "${ADVISORIES}" ] && [ -s "${ADVISORIES}" ]
-    then
-      mv "${ADVISORIES}" "${BASELINE}"
-    fi
+#    if [ -f "${ADVISORIES}" ] && [ -s "${ADVISORIES}" ]
+#    then
+#      mv "${ADVISORIES}" "${BASELINE}"
+#    fi
     get_advisories >"${ADVISORIES}"
+    if [ -n "$REMOTE_HOSTS" ]
+    then
+      get_remote_advisories
+      mv "${ADVISORIES}" "${TMPFILE}"
+      cat "${TMPFILE}" "${REMOTE_ADVISORIES}" | sort -u >"${ADVISORIES}" 2>/dev/null
+      rm "${REMOTE_ADVISORIES}" "${TMPFILE}"
+    fi
     comm -13 "${BASELINE}" "${ADVISORIES}" >"${CURRENT_PATCH_SET}"
   fi
 }

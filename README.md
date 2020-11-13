@@ -6,7 +6,7 @@ Patchmanagement for Red Hat Enterprise Linux Server.
 Use Case
 --------
 
-In our environment we deploy RHEL-Servers for our operating departments to run their applications.
+In our environment we deploy RHEL-Servers for our departments to run their applications.
 
 This role was written to provide a mechanism to install Red Hat Advisories on target nodes once a month. The Sysadmin could choose which Advisories should be installed, e.g. RHSA, RHBA and/or RHEA.
 
