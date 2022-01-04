@@ -69,10 +69,6 @@ create_vars() {
 EOF
 }
 
-get_patch_phases() {
-  ${GET_RHEL_PATCH_PHASES} >${CURRENT_PATCH_PHASES}
-}
-
 create_mail() {
   cat >"${MAIL_TEXT}" <<EOF
 Hallo,
@@ -101,18 +97,8 @@ send_mail() {
   /usr/bin/mailx -s 'Ankündigung der Installation von Red Hat Advisories' "${MAIL_RCP}" <"${MAIL_TEXT}"
 }
 
-send_mail_with_attachment() {
-  /usr/bin/mailx -s 'Ankündigung der Installation von Red Hat Advisories' -a ${CURRENT_PATCH_PHASES} "${MAIL_RCP}" <"${MAIL_TEXT}"
-}
-
 # Main #######################################################################
 create_patch_set
 create_vars
 create_mail
-get_patch_phases
-if [ -f ${CURRENT_PATCH_PHASES} ]
-then
-  send_mail_with_attachment
-else
-  send_mail
-fi
+send_mail
