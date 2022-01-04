@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
 #
-# Beschreibung:
-# Dieses Skript gibt die Gruppen für das RHEL-Patchmanagement und
-# die darin enthaltenen Hosts aus.
+# Description:
+# This script prints the RHEL-Patch-Phases and the hosts within them
+# from the inventory file and prints them to STDOUT.
 from variables import ANSIBLE_INVENTORY
 with open(ANSIBLE_INVENTORY, 'rt') as inventory:
   on_block = False
