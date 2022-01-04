@@ -1,17 +1,18 @@
 # Variables ##################################################################
-BASELINE='/path/to/rhel-patchmanagement/baseline_advisories.txt'
-ADVISORIES='/path/to/rhel-patchmanagement/new_advisories.txt'
-CURRENT_PATCH_SET="/path/to/rhel-patchmanagement/patch_set_`date +%Y-%m-%d.txt`"
-CURRENT_PATCH_PHASES="/path/to/rhel-patchmanagement/current_patch_phases.txt"
-GET_RHEL_PATCH_PHASES="/path/to/rhel-patchmanagement/get_rhel_patch_groups.py"
-VARS='/path/to/rhel-patchmanagement/vars/main.yml'
-MAIL_TEXT='/path/to/rhel-patchmanagement/mail_text.txt'
+ANSIBLE_INVENTORY="/path/to/inventory/file/to/use/hosts"
+BASEPATH="/path/to/rhel-patchmanagement"
+BASELINE="${BASEPATH}/baseline_advisories.txt"
+ADVISORIES="${BASEPATH}/new_advisories.txt"
+CURRENT_PATCH_SET="${BASEPATH}/patch_set_`date +%Y-%m-%d.txt`"
+CURRENT_PATCH_PHASES="${BASEPATH}/current_patch_phases.txt"
+GET_RHEL_PATCH_PHASES="${BASEPATH}/get_rhel_patch_groups.py"
+VARS="${BASEPATH}/vars/main.yml"
+MAIL_TEXT="${BASEPATH}/mail_text.txt"
 MAIL_RCP='rcp@example.com'
 DATE1="`date --iso -d '+7 days'`T04:20"
 DATE2="`date --iso -d '+14 days'`T04:20"
 DATE3="`date --iso -d '+21 days'`T04:20"
 DATE4="`date --iso -d '+22 days'`T04:20"
-ANSIBLE_INVENTORY="/path/to/inventory/file/to/use/hosts"
 # Variables you need when using remote advisory sources ######################
 # These are needed if you want to pull additional advisories from another
 # RHEL version.
