@@ -9,6 +9,7 @@ DATE1="`date --iso -d '+7 days'`T04:20"
 DATE2="`date --iso -d '+14 days'`T04:20"
 DATE3="`date --iso -d '+21 days'`T04:20"
 DATE4="`date --iso -d '+22 days'`T04:20"
+ANSIBLE_INVENTORY="/path/to/inventory/file/to/use/hosts"
 # Variables you need when using remote advisory sources ######################
 # These are needed if you want to pull additional advisories from another
 # RHEL version.
