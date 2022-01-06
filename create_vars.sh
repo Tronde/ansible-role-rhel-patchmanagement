@@ -1,7 +1,7 @@
 #!/bin/bash
 ##############################################################################
 
-source /absolute/path/to/variables.py
+source /absolute/path/to/variables.txt
 
 # Functions ##################################################################
 get_advisories() {
