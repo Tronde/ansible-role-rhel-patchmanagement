@@ -1,4 +1,5 @@
 # Variables ##################################################################
+<<<<<<< HEAD
 BASEPATH="/path/to/rhel-patchmanagement"
 BASELINE="${BASEPATH}/baseline_advisories.txt"
 ADVISORIES="${BASEPATH}/new_advisories.txt"
@@ -7,6 +8,13 @@ CURRENT_PATCH_PHASES="${BASEPATH}/current_patch_phases.txt"
 GET_RHEL_PATCH_PHASES="${BASEPATH}/get_rhel_patch_groups.py"
 VARS="${BASEPATH}/vars/main.yml"
 MAIL_TEXT="${BASEPATH}/mail_text.txt"
+=======
+BASELINE='/path/to/rhel-patchmanagement/baseline_advisories.txt'
+ADVISORIES='/path/to/rhel-patchmanagement/new_advisories.txt'
+CURRENT_PATCH_SET="/path/to/rhel-patchmanagement/patch_set_`date +%Y-%m-%d.txt`"
+VARS='/path/to/rhel-patchmanagement/vars/main.yml'
+MAIL_TEXT='/path/to/rhel-patchmanagement/mail_text.txt'
+>>>>>>> master
 MAIL_RCP='rcp@example.com'
 DATE1="`date --iso -d '+7 days'`T04:20"
 DATE2="`date --iso -d '+14 days'`T04:20"
