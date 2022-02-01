@@ -4,19 +4,13 @@
     register: yum_output
   - debug: var=yum_output
 
-  - name: Reboot Host if packages were updated
-    shell: sleep 2 && shutdown -r now "Ansible updates triggered"
-    async: 1
-    poll: 0
-    ignore_errors: true
-    when: ("Complete!" in yum_output.stdout_lines[-1]) or
-          ("Komplett!" in yum_output.stdout_lines[-1])
+  - name Check if reboot is needed
+    shell:
+      cmd: /usr/bin/needs-restarting -r
+    register: needs_restarting
+    changed_when: False
+    failed_when: False
 
-  - name: waiting for access server
-    local_action: wait_for
-      host={{ inventory_hostname }}
-      state=started
-      port=22
-      delay=30
-      timeout=300
-      connect_timeout=15
+  - name: Reboot Host if packages were updated
+    reboot:
+    when: needs_restarting.rc is defined and needs_restarting.rc != 0
