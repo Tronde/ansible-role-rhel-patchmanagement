@@ -4,7 +4,7 @@
     register: yum_output
   - debug: var=yum_output
 
-  - name Check if reboot is needed
+  - name: Check if reboot is needed
     shell:
       cmd: /usr/bin/needs-restarting -r
     register: needs_restarting
